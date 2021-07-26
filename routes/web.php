@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuitarsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'name' => request('name') ?? 'Person'
+    ]);
 });
+
+Route::get('/about', function () {
+    return 'About'; //view('welcome');
+});
+
+Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show');
