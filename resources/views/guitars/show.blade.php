@@ -3,5 +3,5 @@
 @section('title', 'Guitars')
 
 @section('content')
-This is the guitars page
+{{ $guitar['description'] }}
 @endsection

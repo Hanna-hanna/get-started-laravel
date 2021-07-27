@@ -4,21 +4,37 @@ namespace App\Http\Controllers;
 
 class GuitarsController extends Controller {
     public function index() {
-        return view('guitars');
+        return view('guitars.index', [
+            'guitars' => $this->getData()
+        ]);
     }
     
     public function show($guitar) {
-        $guitars = [
-            'strat' => 'Standart Mexican Strat',
-            'les-paul' => 'Gibson Les Paul Studio'
-        ];
+        $guitars = $this->getData();
     
         if (!array_key_exists($guitar, $guitars)) {
             abort(404);
         }
     
-        return view('guitar', [
-            'description' => $guitars[$guitar]
+        return view('guitars.show', [
+            'guitar' => $guitars[$guitar]
         ]);
+    }
+
+    private function getData() {
+        return [
+            'strat' => [
+                'title' => 'Fender American Standard Strat',
+                'make' => 'Fender',
+                'year' => '1992',
+                'description' => 'This is the description for Fender American Standard Strat'
+            ],
+            'les-paul' => [
+                'title' => 'Gibson Les Paul Studio',
+                'make' => 'Gibson',
+                'year' => '2014',
+                'description' => 'This is the description for Gibson Les Paul Studio'
+            ]
+        ];
     }
 }
