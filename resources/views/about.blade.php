@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('title', 'Welcome')
+@section('title', 'About')
 
 @section('content')
-Hello, {{ $name }}!
+About Page
 @endsection

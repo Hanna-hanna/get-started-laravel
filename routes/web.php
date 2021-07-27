@@ -18,10 +18,12 @@ Route::get('/', function () {
     return view('welcome', [
         'name' => request('name') ?? 'Person'
     ]);
-});
+})->name('home');
 
 Route::get('/about', function () {
-    return 'About'; //view('welcome');
-});
+    return view('about');
+})->name('about');
 
-Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show');
+Route::get('/guitars', 'App\Http\Controllers\GuitarsController@index')->name('guitars.index');
+
+Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show')->name('guitars.show');

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 class GuitarsController extends Controller {
+    public function index() {
+        return view('guitars');
+    }
+    
     public function show($guitar) {
         $guitars = [
             'strat' => 'Standart Mexican Strat',
