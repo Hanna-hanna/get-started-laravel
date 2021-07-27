@@ -25,5 +25,6 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/guitars', 'App\Http\Controllers\GuitarsController@index')->name('guitars.index');
-
+Route::get('/guitars/create', 'App\Http\Controllers\GuitarsController@create')->name('guitars.create');
 Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show')->name('guitars.show');
+

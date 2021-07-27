@@ -21,6 +21,10 @@ class GuitarsController extends Controller {
         ]);
     }
 
+    public function create() {
+        return view('guitars.create');
+    }
+
     private function getData() {
         return [
             'strat' => [
