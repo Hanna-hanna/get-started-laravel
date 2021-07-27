@@ -3,7 +3,8 @@
 @section('title', 'Guitars')
 
 @section('content')
-<form action="" method="POST">
+<form action="{{ route('guitars.store') }}" method="POST">
+    @csrf    
     <div class="form-group">
         <label for="guitar-text">Title</label>
         <input type="text" name="title" id="title" class="form-control">

@@ -27,4 +27,5 @@ Route::get('/about', function () {
 Route::get('/guitars', 'App\Http\Controllers\GuitarsController@index')->name('guitars.index');
 Route::get('/guitars/create', 'App\Http\Controllers\GuitarsController@create')->name('guitars.create');
 Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show')->name('guitars.show');
+Route::post('/guitars', 'App\Http\Controllers\GuitarsController@store')->name('guitars.store');
 

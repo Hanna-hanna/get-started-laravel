@@ -4,9 +4,9 @@
 
 @section('content')
 
-@foreach($guitars as $key => $guitar)
+@foreach($guitars as $guitar)
 
-<h4><a href="{{ route('guitars.show', $key) }}">{{ $guitar['title'] }}</a></h4>
+<h4><a href="{{ route('guitars.show', $guitar->id) }}">{{ $guitar['title'] }}</a></h4>
 
 <div class="row">
     <div class="col-sm-2">
@@ -16,7 +16,7 @@
         </ul>
     </div>
     <div class="col">
-        {{ $guitar['description'] }}
+        {{ $guitar->description }}
     </div>
 </div>
 

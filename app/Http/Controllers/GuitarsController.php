@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guitar;
+
 class GuitarsController extends Controller {
     public function index() {
         return view('guitars.index', [
-            'guitars' => $this->getData()
+            'guitars' => Guitar::all()
         ]);
     }
     
     public function show($guitar) {
-        $guitars = $this->getData();
-    
-        if (!array_key_exists($guitar, $guitars)) {
-            abort(404);
-        }
-    
         return view('guitars.show', [
-            'guitar' => $guitars[$guitar]
+            'guitar' =>  Guitar::findOrFail($guitar)
         ]);
     }
 
@@ -25,20 +21,15 @@ class GuitarsController extends Controller {
         return view('guitars.create');
     }
 
-    private function getData() {
-        return [
-            'strat' => [
-                'title' => 'Fender American Standard Strat',
-                'make' => 'Fender',
-                'year' => '1992',
-                'description' => 'This is the description for Fender American Standard Strat'
-            ],
-            'les-paul' => [
-                'title' => 'Gibson Les Paul Studio',
-                'make' => 'Gibson',
-                'year' => '2014',
-                'description' => 'This is the description for Gibson Les Paul Studio'
-            ]
-        ];
+    public function store() {
+        $guitar = new Guitar();
+        $guitar->title = request('title');
+        $guitar->make = request('make');
+        $guitar->year = request('year');
+        $guitar->description = request('description');
+
+        $guitar->save();
+
+        return redirect()->route('guitars.index');
     }
 }
