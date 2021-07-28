@@ -38,4 +38,29 @@ class GuitarsController extends Controller {
 
         return redirect()->route('guitars.index');
     }
+
+    public function edit($guitar) {
+        return view('guitars.edit', [
+            'guitar' =>  Guitar::findOrFail($guitar)
+        ]);
+    }
+
+    public function update($guitar) {
+        request()->validate([
+            'title' => 'required',
+            'make' => 'required',
+            'year' => ['required', 'integer'],
+            'description' => 'required'
+        ]);
+
+        $record = Guitar::findOrFail($guitar);
+        $record->title = request('title');
+        $record->make = request('make');
+        $record->year = request('year');
+        $record->description = request('description');
+        
+        $record->save();
+
+        return redirect()->route('guitars.show', $record->id);
+    }
 }

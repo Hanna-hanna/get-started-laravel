@@ -24,8 +24,21 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/guitars', 'App\Http\Controllers\GuitarsController@index')->name('guitars.index');
-Route::get('/guitars/create', 'App\Http\Controllers\GuitarsController@create')->name('guitars.create');
-Route::get('/guitars/{guitar}', 'App\Http\Controllers\GuitarsController@show')->name('guitars.show');
-Route::post('/guitars', 'App\Http\Controllers\GuitarsController@store')->name('guitars.store');
+Route::get('/guitars', 
+    'App\Http\Controllers\GuitarsController@index')->name('guitars.index');
+
+Route::get('/guitars/create', 
+    'App\Http\Controllers\GuitarsController@create')->name('guitars.create');
+
+Route::get('/guitars/{guitar}',
+    'App\Http\Controllers\GuitarsController@show')->name('guitars.show');
+
+Route::post('/guitars', 
+    'App\Http\Controllers\GuitarsController@store')->name('guitars.store');
+
+Route::get('/guitars/{guitar}/edit', 
+    'App\Http\Controllers\GuitarsController@edit')->name('guitars.edit');
+
+Route::put('/guitars/{guitar}',
+    'App\Http\Controllers\GuitarsController@update')->name('guitars.update');
 

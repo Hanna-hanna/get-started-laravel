@@ -1,15 +1,16 @@
 @extends('layout')
 
-@section('title', 'Create Guitars')
+@section('title', 'Edit Guitar')
 
 @section('content')
-<form action="{{ route('guitars.store') }}" method="POST">
-    @csrf    
+<form action="{{ route('guitars.update', $guitar->id) }}" method="POST">
+    @csrf 
+    @method('PUT')  
     <div class="form-group">
         <label for="guitar-text">Title</label>
         <input type="text" name="title" id="title" 
         class="form-control @error('title') is-invalid @enderror"
-        value="{{ old('title') }}">
+        value="{{ $guitar->title }}">
         @error('title')
             <div class="invalid-feedback">
                 {{ $errors->first('title') }}
@@ -20,7 +21,7 @@
         <label for="make">Make</label>
         <input type="text" name="make" id="make" 
         class="form-control @error('make') is-invalid @enderror"
-        value="{{ old('make') }}">
+        value="{{ $guitar->make }}">
         @error('make')
             <div class="invalid-feedback">
                 {{ $errors->first('make') }}
@@ -31,7 +32,7 @@
         <label for="year">Year</label>
         <input type="text" name="year" id="year" 
         class="form-control @error('year') is-invalid @enderror"
-        value="{{ old('year') }}">
+        value="{{ $guitar->year }}">
         @error('year')
             <div class="invalid-feedback">
                 {{ $errors->first('year') }}
@@ -41,7 +42,7 @@
     <div class="form-group">
         <label for="description">Description</label>
         <textarea type="text" name="description" id="description" 
-        class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+        class="form-control @error('description') is-invalid @enderror">{{ $guitar->description }}</textarea>
         @error('description')
             <div class="invalid-feedback">
                 {{ $errors->first('description') }}
@@ -49,7 +50,7 @@
         @enderror
     </div>
     <div class="form-group">
-        <button class="btn btn-primary">Create Guitar</button>
+        <button class="btn btn-primary">Edit Guitar</button>
     </div>
 </form>
 @endsection
