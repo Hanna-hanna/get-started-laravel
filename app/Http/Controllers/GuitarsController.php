@@ -11,9 +11,9 @@ class GuitarsController extends Controller {
         ]);
     }
     
-    public function show($guitar) {
+    public function show(Guitar $guitar) {
         return view('guitars.show', [
-            'guitar' =>  Guitar::findOrFail($guitar)
+            'guitar' => $guitar
         ]);
     }
 
@@ -22,45 +22,34 @@ class GuitarsController extends Controller {
     }
 
     public function store() {
-        request()->validate([
+        $validated = request()->validate([
             'title' => 'required',
             'make' => 'required',
             'year' => ['required', 'integer'],
             'description' => 'required'
         ]);
-        $guitar = new Guitar();
-        $guitar->title = request('title');
-        $guitar->make = request('make');
-        $guitar->year = request('year');
-        $guitar->description = request('description');
 
-        $guitar->save();
+        Guitar::create($validated);
 
         return redirect()->route('guitars.index');
     }
 
-    public function edit($guitar) {
+    public function edit(Guitar $guitar) {
         return view('guitars.edit', [
-            'guitar' =>  Guitar::findOrFail($guitar)
+            'guitar' => $guitar
         ]);
     }
 
-    public function update($guitar) {
-        request()->validate([
+    public function update(Guitar $guitar) {
+        $validated = request()->validate([
             'title' => 'required',
             'make' => 'required',
             'year' => ['required', 'integer'],
             'description' => 'required'
         ]);
 
-        $record = Guitar::findOrFail($guitar);
-        $record->title = request('title');
-        $record->make = request('make');
-        $record->year = request('year');
-        $record->description = request('description');
-        
-        $record->save();
+        $guitar->update($validated);
 
-        return redirect()->route('guitars.show', $record->id);
+        return redirect()->route('guitars.show', $guitar->id);
     }
 }
