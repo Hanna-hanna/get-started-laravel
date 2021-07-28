@@ -22,6 +22,12 @@ class GuitarsController extends Controller {
     }
 
     public function store() {
+        request()->validate([
+            'title' => 'required',
+            'make' => 'required',
+            'year' => ['required', 'integer'],
+            'description' => 'required'
+        ]);
         $guitar = new Guitar();
         $guitar->title = request('title');
         $guitar->make = request('make');
